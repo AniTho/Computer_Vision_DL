@@ -12,3 +12,5 @@ __Day 004 Progress:__ Learnt about Convolutional Neural Network (CNN) and its co
 __Day 005 Progress:__ Studied LeNet architecture and implemented it using pytorch (with some modification) and trained it on Fashion MNIST dataset. Also learnt about data augmentation and started to implement some of the functions and their visualization using kornia library.
 
 __Day 006 Progress:__ Trained final convolution neural network (inspired from LeNet) on fashion MNIST dataset with augmentation and shown the affect of translation on final trained model.
+
+__Day 007 Progress:__ Optimized the data loader, since it is the part where most time is consumed and also emperically shown result of the comparison. Trained a VGG Net model using transfer learning. Also implemented mixed precision version of the training.
