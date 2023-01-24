@@ -14,3 +14,5 @@ __Day 005 Progress:__ Studied LeNet architecture and implemented it using pytorc
 __Day 006 Progress:__ Trained final convolution neural network (inspired from LeNet) on fashion MNIST dataset with augmentation and shown the affect of translation on final trained model.
 
 __Day 007 Progress:__ Optimized the data loader, since it is the part where most time is consumed and also emperically shown result of the comparison. Trained a VGG Net model using transfer learning. Also implemented mixed precision version of the training.
+
+__Day 008 Progress:__ Used Resnet using timm library, also replaced Kornia augmentations with albumentation augmentations. Tried different weight initialization techniques.
