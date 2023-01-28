@@ -16,3 +16,5 @@ __Day 006 Progress:__ Trained final convolution neural network (inspired from Le
 __Day 007 Progress:__ Optimized the data loader, since it is the part where most time is consumed and also emperically shown result of the comparison. Trained a VGG Net model using transfer learning. Also implemented mixed precision version of the training.
 
 __Day 008 Progress:__ Used Resnet using timm library, also replaced Kornia augmentations with albumentation augmentations. Tried different weight initialization techniques.
+
+__DAY 009 Progress:__ Started to work on the project to find age and gender of a person from image.
