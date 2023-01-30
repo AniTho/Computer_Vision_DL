@@ -1,3 +1,4 @@
 .ipynb_checkpoints/
 data/
 saved_models/
+*.pyc
