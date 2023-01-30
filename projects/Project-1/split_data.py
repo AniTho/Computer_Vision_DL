@@ -19,7 +19,16 @@ def extract_gender(row):
         return 'female'
     return 'male'
 
-def split(img_dir, train_split = 0.8, valid_split = 0.2):
+def split(base_data_dir, img_dir, train_split = 0.8, valid_split = 0.2):
+    '''
+    Creates CSV from the image path consisting of image name, age, gender and
+    the type of split the particular image will be part of
+    Args:
+    - base_data_dir(str): Path where entire data is stored (for csv file)
+    - images_dir (str): Path where all images are stored
+    - train_split (float): Percent of data to be part of train data
+    - valid_split (float): Percent of data to be part of valid data
+    '''
     if os.path.exists('data/UTKFace/data.csv'):
         print("File already exists")
         return
@@ -40,6 +49,6 @@ def split(img_dir, train_split = 0.8, valid_split = 0.2):
     df.loc[valid_idxs, 'split_type'] = 'valid'
     df.loc[test_idxs, 'split_type'] = 'test'
     df.drop(['path'], axis = 1, inplace=True)
-    df.to_csv('data/UTKFace/data.csv', index=False)
+    df.to_csv(f'{base_data_dir}/data.csv', index=False)
 
     
