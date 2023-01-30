@@ -19,7 +19,7 @@ def extract_gender(row):
         return 'female'
     return 'male'
 
-def split(img_dir, train_split = 0.8):
+def split(img_dir, train_split = 0.8, valid_split = 0.2):
     if os.path.exists('data/UTKFace/data.csv'):
         print("File already exists")
         return
@@ -30,10 +30,15 @@ def split(img_dir, train_split = 0.8):
     df['age'] = df.apply(lambda row: extract_age(row), axis = 1)
     df['gender'] = df.apply(lambda row: extract_gender(row), axis = 1)
     df = df.sample(frac = 1, random_state = 42).reset_index(drop=True)
-    df['valid'] = 0
-    num_columns = int(train_split*len(df))
-    valid_idxs = list(range(num_columns, len(df)))
-    df.loc[valid_idxs, 'valid'] = 1
+    df['split_type'] = None
+    train_columns = int(train_split*len(df))
+    valid_columns = int(valid_split*len(df))
+    train_idxs = list(range(train_columns))
+    valid_idxs = list(range(train_columns, train_columns + valid_columns))
+    test_idxs = list(range(train_columns + valid_columns, len(df)))
+    df.loc[train_idxs, 'split_type'] = 'train' 
+    df.loc[valid_idxs, 'split_type'] = 'valid'
+    df.loc[test_idxs, 'split_type'] = 'test'
     df.drop(['path'], axis = 1, inplace=True)
     df.to_csv('data/UTKFace/data.csv', index=False)
 
