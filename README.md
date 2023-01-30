@@ -18,3 +18,5 @@ __Day 007 Progress:__ Optimized the data loader, since it is the part where most
 __Day 008 Progress:__ Used Resnet using timm library, also replaced Kornia augmentations with albumentation augmentations. Tried different weight initialization techniques.
 
 __DAY 009 Progress:__ Started to work on the project to find age and gender of a person from image.
+
+__DAY 010 Progress:__ Build the dataloader and added certain utility functions for visualization.
