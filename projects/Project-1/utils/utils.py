@@ -51,6 +51,7 @@ def build_model(model, lr = 1e-04, schedule = False):
     criterion_mse = torch.nn.MSELoss()
     criterion_bce = torch.nn.BCELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    scheduler = None
     if schedule:
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, eta_min=1e-07)
         return criterion_mse, criterion_bce, optimizer, scheduler
