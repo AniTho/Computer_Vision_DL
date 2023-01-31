@@ -90,7 +90,7 @@ def train(trainloader, validloader, model, criterion_mse, criterion_bce, optimiz
             save_checkpoint(model, optimizer, 'saved_models/multi_task.pt')
 
         if scheduler:
-            scheduler.step(valid_total_loss)
+            scheduler.step()
 
         print(f'''[{epoch:2}/{epochs}]:
 Train BCE Loss: {batch_bce_loss:.4f}, Train MSE Loss: {batch_mse_loss:.4f}
