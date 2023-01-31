@@ -20,8 +20,7 @@ class MultiTaskModel(nn.Module):
                                                 nn.ReLU(),
                                                 nn.BatchNorm1d(512),
                                                 nn.Dropout(dropout_p),
-                                                nn.Linear(512, 1),
-                                                nn.Sigmoid())
+                                                nn.Linear(512, 1))
         self.gender_predictor.apply(self.initialize_weights)
         self.age_predictor.apply(self.initialize_weights)
 
