@@ -20,3 +20,5 @@ __Day 008 Progress:__ Used Resnet using timm library, also replaced Kornia augme
 __DAY 009 Progress:__ Started to work on the project to find age and gender of a person from image.
 
 __DAY 010 Progress:__ Build the dataloader and added certain utility functions for visualization.
+
+__DAY 011 Progress:__ Build the model and trained it.
