@@ -24,16 +24,16 @@ def main():
     split_data.split(base_data_dir, images_dir, train_split, valid_split)
     trainloader, validloader, testloader = load_data(base_data_dir, images_dir, aug_p, batch_size)
     model = create_model(base_model, freeze, num_layers, dropout_p)
-    criterion_mse, criterion_bce, optimizer, scheduler = build_model(model, epochs, learning_rate, True)
-    model, train_bce_losses, train_mse_losses, valid_bce_losses, valid_mse_losses, \
-    best_loss = train(trainloader, validloader, model, criterion_mse, criterion_bce, optimizer, epochs, scheduler = scheduler)
+    criterion_mae, criterion_bce, optimizer, scheduler = build_model(model, epochs, learning_rate, True)
+    model, train_bce_losses, train_mae_losses, valid_bce_losses, valid_mae_losses, \
+    best_loss = train(trainloader, validloader, model, criterion_mae, criterion_bce, optimizer, epochs, scheduler = scheduler)
 
     # Unfreeze
     model = create_model(base_model, freeze = False, dropout_p=dropout_p)
     model = load_checkpoint(model, file_path='saved_models/multi_task.pt')
-    criterion_mse, criterion_bce, optimizer, scheduler = build_model(model, epochs, unfrozen_learning_rate, True)
-    model, train_bce_losses, train_mse_losses, valid_bce_losses, valid_mse_losses, \
-    best_loss = train(trainloader, validloader, model, criterion_mse, criterion_bce, optimizer, epochs, best_loss, scheduler)
+    criterion_mae, criterion_bce, optimizer, scheduler = build_model(model, epochs, unfrozen_learning_rate, True)
+    model, train_bce_losses, train_mae_losses, valid_bce_losses, valid_mae_losses, \
+    best_loss = train(trainloader, validloader, model, criterion_mae, criterion_bce, optimizer, epochs, best_loss, scheduler)
 
     model_scripted = torch.jit.script(model)
     model_scripted.save('saved_models/multitask_final.pt')
