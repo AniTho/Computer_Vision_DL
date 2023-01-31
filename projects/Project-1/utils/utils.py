@@ -49,7 +49,7 @@ def build_model(model, epochs, lr = 1e-04, schedule = False):
     - (torch.optim): Adam optimizer
     - (torch.optim): [Optional] Learning Rate Scheduler
     '''
-    criterion_mse = torch.nn.MSELoss()
+    criterion_mse = torch.nn.L1Loss()
     criterion_bce = torch.nn.BCEWithLogitsLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
     scheduler = None
