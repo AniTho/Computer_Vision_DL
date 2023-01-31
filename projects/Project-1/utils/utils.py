@@ -56,3 +56,35 @@ def build_model(model, lr = 1e-04, schedule = False):
         return criterion_mse, criterion_bce, optimizer, scheduler
     return criterion_mse, criterion_bce, optimizer
     
+def save_checkpoint(model, optimizer = None, file_path = 'checkpoint.pt'):
+    '''
+    Save checkpoints for loading later and resuming training
+
+    Args:
+    - model (torch.nn): Neural network model to be saved
+    - optimizer (torch.optim): Current state of optimizer
+    - file_path (str): Path to save the checkpoint
+    '''
+    save_file = {'model_state_dict': model.state_dict()}
+    if optimizer:
+        save_file['optimizer_state_dict'] = optimizer.state_dict()
+    torch.save(save_file, file_path)
+    
+def load_checkpoint(model, optimizer, file_path):
+    '''
+    Load checkpoints
+
+    Args:
+    - model (torch.nn): Neural network model to be loaded
+    - optimizer (torch.optim): Optimizer data to be loaded
+    - file_path (str): Path where the checkpoint is saved
+
+    Returns:
+    - (torch.nn): Model with weights loaded from checkpoint
+    - (torch.optim): Optimizer state loaded from checkpoint
+    '''
+    checkpoint = torch.load(file_path)
+    model.load_state_dict(checkpoint['model_state_dict'])
+    if optimizer and ('optimizer_state_dict' in checkpoint):
+        optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+    return model, optimizer
