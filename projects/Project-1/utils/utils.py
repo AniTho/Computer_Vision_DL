@@ -32,3 +32,27 @@ def visualize_data(dataloader, num_images, figsize = (10,10)):
             if current_img == total_imgs:
                 plt.show()
                 return
+
+def build_model(model, lr = 1e-04, schedule = False):
+    '''
+    Build the loss, optimizer and scheduler used for training model
+
+    Args:
+    - model (torch.nn): Model object used
+    - lr (float): Learning rate for optimizer
+    - schedule (bool): To use learning rate scheduler or not
+
+    Returns:
+    - (torch.nn): Mean squared error loss fxn
+    - (torch.nn): Binary cross entropy loss fxn
+    - (torch.optim): Adam optimizer
+    - (torch.optim): [Optional] Learning Rate Scheduler
+    '''
+    criterion_mse = torch.nn.MSELoss()
+    criterion_bce = torch.nn.BCELoss()
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    if schedule:
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, eta_min=1e-07)
+        return criterion_mse, criterion_bce, optimizer, scheduler
+    return criterion_mse, criterion_bce, optimizer
+    
