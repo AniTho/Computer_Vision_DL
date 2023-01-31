@@ -33,12 +33,13 @@ def visualize_data(dataloader, num_images, figsize = (10,10)):
                 plt.show()
                 return
 
-def build_model(model, lr = 1e-04, schedule = False):
+def build_model(model, epochs, lr = 1e-04, schedule = False):
     '''
     Build the loss, optimizer and scheduler used for training model
 
     Args:
     - model (torch.nn): Model object used
+    - epochs (int): Number of maximum iteration
     - lr (float): Learning rate for optimizer
     - schedule (bool): To use learning rate scheduler or not
 
@@ -49,11 +50,11 @@ def build_model(model, lr = 1e-04, schedule = False):
     - (torch.optim): [Optional] Learning Rate Scheduler
     '''
     criterion_mse = torch.nn.MSELoss()
-    criterion_bce = torch.nn.BCELoss()
+    criterion_bce = torch.nn.BCEWithLogitsLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
     scheduler = None
     if schedule:
-        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, eta_min=1e-07)
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs, eta_min=1e-07)
         return criterion_mse, criterion_bce, optimizer, scheduler
     return criterion_mse, criterion_bce, optimizer
     
