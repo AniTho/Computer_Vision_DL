@@ -17,7 +17,7 @@ class UTKdataset:
         item_row = self.df.iloc[idx]
         img_name = item_row['fname']
         age = (item_row['age'] - 1.0 )/(115.0 - 1.0) # Min age: 1, Max age: 115
-        gender = item_row['gender']
+        gender = 0 if item_row['gender']=='female' else 1
         img_path = f'{self.images_dir}/{img_name}'
         img = plt.imread(img_path) / 255.0
         if self.transforms:
