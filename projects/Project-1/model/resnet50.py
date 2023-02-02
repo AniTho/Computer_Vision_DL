@@ -7,20 +7,23 @@ class MultiTaskModel(nn.Module):
         super(MultiTaskModel, self).__init__()
         model = timm.create_model(base_model, pretrained=True)
         lin_features = model.num_features
-        self.feature_extractor = nn.Sequential(*list(model.children())[:-1])
+        layers = list(model.children())[:-1]
+        layers.extend([nn.Linear(lin_features, 512),
+                        nn.ReLU(),
+                        nn.BatchNorm1d(512),
+                        nn.Dropout(dropout_p),
+                        nn.Linear(512, 64),
+                        nn.ReLU(),
+                        nn.BatchNorm1d(64),
+                        nn.Dropout(dropout_p)])
+        self.feature_extractor = nn.Sequential(*layers)
         if freeze:
             self.freeze_layers(num_freeze)
-        self.age_predictor = nn.Sequential(nn.Linear(lin_features, 512),
-                                            nn.ReLU(),
-                                            nn.BatchNorm1d(512),
-                                            nn.Dropout(dropout_p),
-                                            nn.Linear(512, 1),
-                                            nn.Sigmoid())
-        self.gender_predictor = nn.Sequential(nn.Linear(lin_features, 512),
-                                                nn.ReLU(),
-                                                nn.BatchNorm1d(512),
-                                                nn.Dropout(dropout_p),
-                                                nn.Linear(512, 1))
+        self.age_predictor = nn.Sequential(nn.Linear(64, 1),
+                                           nn.Sigmoid())
+        self.gender_predictor = nn.Sequential(nn.Linear(64, 1))
+
+        self.feature_extractor.apply(self.initialize_weights)
         self.gender_predictor.apply(self.initialize_weights)
         self.age_predictor.apply(self.initialize_weights)
 
