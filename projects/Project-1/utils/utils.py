@@ -96,3 +96,29 @@ def denormalize_age(age):
 
 def get_gender(gender):
     return 'female' if gender == 0 else 'male'
+
+def plot_losses(train_loss, valid_loss, title = "Loss vs epochs", figsize = (4,4)):
+    plt.figure(figsize=figsize)
+    plt.title(title)
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.plot(train_loss, 'r--', label = 'Train')
+    plt.plot(valid_loss, 'g-', label = 'Valid')
+    plt.legend()
+    plt.show()
+
+def calculate_accuracy(dataloader, model):
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    with torch.no_grad():
+        model.eval()
+        total = 0
+        num_correct = 0
+        for imgs, _, genders in dataloader:
+            imgs = imgs.to(device, non_blocking = True)
+            genders = genders.to(device, non_blocking = True).float()
+            _, pred_genders = model(imgs)
+            pred_genders = (pred_genders >= 0.5).float().squeeze()
+            num_correct += (pred_genders == genders).sum().item()
+            total += len(genders)
+        
+        print(f"Final Accuracy: {num_correct/total*100:.3f}")
