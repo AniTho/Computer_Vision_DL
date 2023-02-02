@@ -9,6 +9,7 @@ The projects aims to develop a system to detect the age and gender of the person
 - [ ] Clean the dataset for wrongly labelled data.
 - [ ] Detect human from the image and pass each detected person through the model for detection
 - [ ] Finally deploy it to detect persons from video, draw a bounding boxes around them to try and predict the age and gender of the detected person.
+- [ ] Do Proper Documentation of code.
 
 ## Dataset Citation:
 @inproceedings{zhifei2017cvpr,
