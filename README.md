@@ -22,3 +22,5 @@ __DAY 009 Progress:__ Started to work on the project to find age and gender of a
 __DAY 010 Progress:__ Build the dataloader and added certain utility functions for visualization.
 
 __DAY 011 Progress:__ Build the model and trained it.
+
+__DAY 012 Progress:__ Fixed some bugs in the project. Also added a jupyter notebook for purposes of visualization. Read about visualizing what conv nets are learning and especially grad cams. Also added functionality to visualize the output and plotting losses. Also visually inspecting some data, the data is wrongly labelled which has to be corrected.
