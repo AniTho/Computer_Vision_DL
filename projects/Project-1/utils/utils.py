@@ -72,7 +72,7 @@ def save_checkpoint(model, optimizer = None, file_path = 'checkpoint.pt'):
         save_file['optimizer_state_dict'] = optimizer.state_dict()
     torch.save(save_file, file_path)
     
-def load_checkpoint(model, optimizer, file_path):
+def load_checkpoint(model, optimizer = None, file_path = 'checkpoint.pt'):
     '''
     Load checkpoints
 
