@@ -27,7 +27,7 @@ def visualize_data(dataloader, num_images, figsize = (10,10)):
             img = np.transpose(inv_transforms(img).detach().cpu().numpy(), (1,2,0))
             axes[current_img//grid_size, current_img%grid_size].imshow(img)
             axes[current_img//grid_size, current_img%grid_size].axis('off')
-            axes[current_img//grid_size, current_img%grid_size].set_title(f"Age: {age}, Gender: {gender}")
+            axes[current_img//grid_size, current_img%grid_size].set_title(f"Age: {denormalize_age(age)}, Gender: {get_gender(gender)}")
             current_img+=1
             if current_img == total_imgs:
                 plt.show()
@@ -90,3 +90,9 @@ def load_checkpoint(model, optimizer = None, file_path = 'checkpoint.pt'):
     if optimizer and ('optimizer_state_dict' in checkpoint):
         optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
     return model, optimizer
+
+def denormalize_age(age):
+    return int(age*(115.0 - 1.0) + 1.0)
+
+def get_gender(gender):
+    return 'female' if gender == 0 else 'male'
