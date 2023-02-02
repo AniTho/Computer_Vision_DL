@@ -20,7 +20,7 @@ def main():
     num_layers = 120
     learning_rate = 1e-03
     unfrozen_learning_rate = 3e-05
-    epochs = 20
+    epochs = 10
     split_data.split(base_data_dir, images_dir, train_split, valid_split)
     trainloader, validloader, testloader = load_data(base_data_dir, images_dir, aug_p, batch_size)
     model = create_model(base_model, freeze, num_layers, dropout_p)
@@ -28,9 +28,10 @@ def main():
     model, train_bce_losses, train_mae_losses, valid_bce_losses, valid_mae_losses, \
     best_loss = train(trainloader, validloader, model, criterion_mae, criterion_bce, optimizer, epochs, scheduler = scheduler)
 
+    print(f'{"*"*10} Unfreezing {"*"*10}')
     # Unfreeze
     model = create_model(base_model, freeze = False, dropout_p=dropout_p)
-    model = load_checkpoint(model, file_path='saved_models/multi_task.pt')
+    model, _ = load_checkpoint(model, file_path='saved_models/multi_task.pt')
     criterion_mae, criterion_bce, optimizer, scheduler = build_model(model, epochs, unfrozen_learning_rate, True)
     model, train_bce_losses, train_mae_losses, valid_bce_losses, valid_mae_losses, \
     best_loss = train(trainloader, validloader, model, criterion_mae, criterion_bce, optimizer, epochs, best_loss, scheduler)
