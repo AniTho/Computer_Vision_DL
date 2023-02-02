@@ -5,6 +5,7 @@ from utils.utils import save_checkpoint, load_checkpoint
 def train_batch(imgs, ages, genders, model, optimizer, criterion_mae, criterion_bce, scaler = None):
     loss_mae = 0.0
     loss_bce = 0.0
+    optimizer.zero_grad()
     if scaler:
         with torch.cuda.amp.autocast():
             pred_age, pred_genders = model(imgs)
@@ -25,13 +26,15 @@ def train_batch(imgs, ages, genders, model, optimizer, criterion_mae, criterion_
 
 
 def validate_batch(imgs, ages, genders, model, criterion_mae, criterion_bce):
-    loss_mae = 0.0
-    loss_bce = 0.0
-    pred_age, pred_genders = model(imgs)
-    loss_mae = criterion_mae(pred_age.squeeze(), ages)
-    loss_bce = criterion_bce(pred_genders.squeeze(), genders)
-    total_loss = loss_mae + loss_bce
-    return loss_mae.item(), loss_bce.item(), total_loss.item()
+    with torch.no_grad():
+        model.eval()
+        loss_mae = 0.0
+        loss_bce = 0.0
+        pred_age, pred_genders = model(imgs)
+        loss_mae = criterion_mae(pred_age.squeeze(), ages)
+        loss_bce = criterion_bce(pred_genders.squeeze(), genders)
+        total_loss = loss_mae + loss_bce
+        return loss_mae.item(), loss_bce.item(), total_loss.item()
 
 def train(trainloader, validloader, model, criterion_mae, criterion_bce, optimizer, epochs, best_loss = 999999, scheduler = None):
     '''
