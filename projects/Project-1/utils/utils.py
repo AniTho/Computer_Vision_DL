@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from torchvision import transforms
 import numpy as np
 import torch
+import cv2
 
 def visualize_data(dataloader, num_images, figsize = (10,10)):
     '''
@@ -122,3 +123,33 @@ def calculate_accuracy(dataloader, model):
             total += len(genders)
         
         print(f"Final Accuracy: {num_correct/total*100:.3f}")
+
+def gradcam_visualization(img, model):
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    inv_transforms = transforms.Compose([transforms.Normalize(mean = [ 0., 0., 0. ],
+                                        std = [ 1/0.229, 1/0.224, 1/0.225 ]),
+                                      transforms.Normalize(mean = [-0.485, -0.456, -0.406],
+                                         std = [ 1., 1., 1. ])])
+    img = img.to(device)[None]
+    model = model.to(device)
+    activation_network = model.feature_extractor[:8]
+    age, gender = model(img)
+    feature_maps = activation_network(img)
+    model.zero_grad()
+    age.backward(retain_graph = True)
+    gender.backward(retain_graph = True)
+    gradients_mean = model.feature_extractor[7][-1].conv3.weight.grad.data.mean((1,2,3))
+    for i in range(len(gradients_mean)):
+        feature_maps[:,i, :, :] *= gradients_mean[i]
+    heatmap = torch.mean(feature_maps, dim = 1)[0].cpu().detach()
+    heatmap = heatmap.numpy()
+    min_value, max_value = heatmap.min(), heatmap.max()
+    heatmap = 255*((heatmap - min_value)/(max_value - min_value))
+    heatmap = heatmap.astype(np.uint8)
+    img = 255*np.transpose(inv_transforms(img[0]).detach().cpu().numpy(), (1,2,0))
+    heatmap = cv2.resize(heatmap, img.shape[:-1])
+    heatmap = 255 - heatmap
+    heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET).astype(np.uint8)
+    heatmap = (0.3*heatmap + 0.7*img).astype(np.uint8)
+    plt.imshow(heatmap)
+    plt.show()
