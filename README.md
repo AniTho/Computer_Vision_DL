@@ -24,3 +24,10 @@ __DAY 010 Progress:__ Build the dataloader and added certain utility functions f
 __DAY 011 Progress:__ Build the model and trained it.
 
 __DAY 012 Progress:__ Fixed some bugs in the project. Also added a jupyter notebook for purposes of visualization. Read about visualizing what conv nets are learning and especially grad cams. Also added functionality to visualize the output and plotting losses. Also visually inspecting some data, the data is wrongly labelled which has to be corrected.
+
+__DAY 013 Progress:__ Studied about gradcam in depth for visualizing what convenet is learning. Studied from several blogs and implemented in code.
+Reference:
+
+1. https://towardsdatascience.com/interpretability-in-deep-learning-with-w-b-cam-and-gradcam-45ba5296a58a
+2. https://coderzcolumn.com/tutorials/artificial-intelligence/pytorch-grad-cam
+3. https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82
