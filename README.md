@@ -31,3 +31,5 @@ Reference:
 1. https://towardsdatascience.com/interpretability-in-deep-learning-with-w-b-cam-and-gradcam-45ba5296a58a
 2. https://coderzcolumn.com/tutorials/artificial-intelligence/pytorch-grad-cam
 3. https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82
+
+__Day 014 Progress:__ Studied basics of object detection, building bounding boxes.
