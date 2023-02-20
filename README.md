@@ -33,3 +33,5 @@ Reference:
 3. https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82
 
 __Day 014 Progress:__ Studied basics of object detection, building bounding boxes.
+
+__Day 015 Progress:__ Played with felzenszwalb segmentation and read more about it and read about selective search as well and visualize it using library. Also studied about IoU. 
