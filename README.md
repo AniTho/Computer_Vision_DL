@@ -35,3 +35,5 @@ Reference:
 __Day 014 Progress:__ Studied basics of object detection, building bounding boxes.
 
 __Day 015 Progress:__ Played with felzenszwalb segmentation and read more about it and read about selective search as well and visualize it using library. Also studied about IoU. 
+
+__Day 016 Progress:__ Finished IoU, studied about mAP and non max supression. Downloaded Coco dataset.
