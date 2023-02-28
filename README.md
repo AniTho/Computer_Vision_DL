@@ -37,3 +37,5 @@ __Day 014 Progress:__ Studied basics of object detection, building bounding boxe
 __Day 015 Progress:__ Played with felzenszwalb segmentation and read more about it and read about selective search as well and visualize it using library. Also studied about IoU. 
 
 __Day 016 Progress:__ Finished IoU, studied about mAP and non max supression. Downloaded Coco dataset.
+
+__Day 017 Progress:__ Explored data and fetch labels and bbox from coco json file and generated a csv from it
