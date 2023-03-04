@@ -41,3 +41,5 @@ __Day 016 Progress:__ Finished IoU, studied about mAP and non max supression. Do
 __Day 017 Progress:__ Explored data and fetch labels and bbox from coco json file and generated a csv from it
 
 __Day 018 Progress:__ Written code for fetching region of interest from all the proposed region by selective search and the offset between true bounding box label and proposed one
+
+__Day 019 Progress:__ Build Dataloader for RCNN and started building the architecture.
