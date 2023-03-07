@@ -43,3 +43,5 @@ __Day 017 Progress:__ Explored data and fetch labels and bbox from coco json fil
 __Day 018 Progress:__ Written code for fetching region of interest from all the proposed region by selective search and the offset between true bounding box label and proposed one
 
 __Day 019 Progress:__ Build Dataloader for RCNN and started building the architecture.
+
+__Day 020 Progress:__ Trained RCNN from scratch on coco dataset.
