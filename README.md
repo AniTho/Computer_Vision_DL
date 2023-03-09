@@ -45,3 +45,5 @@ __Day 018 Progress:__ Written code for fetching region of interest from all the 
 __Day 019 Progress:__ Build Dataloader for RCNN and started building the architecture.
 
 __Day 020 Progress:__ Trained RCNN from scratch on coco dataset.
+
+__Day 021 Progress:__ Took a break from object detection algorithms and started studying image manipulation, starting with autoencoder. Also studied a bit about logging using wandb
