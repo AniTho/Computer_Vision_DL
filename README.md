@@ -49,3 +49,5 @@ __Day 020 Progress:__ Trained RCNN from scratch on coco dataset.
 __Day 021 Progress:__ Took a break from object detection algorithms and started studying image manipulation, starting with autoencoder. Also studied a bit about logging using wandb
 
 __Day 022 Progress:__ Implemented vanilla encoder using fully connected network.
+
+__Day 023 Progress:__ Tried some hyperparameter tuning and added visualization. Also tweaked implemented network.
