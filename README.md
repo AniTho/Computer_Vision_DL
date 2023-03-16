@@ -51,4 +51,6 @@ __Day 021 Progress:__ Took a break from object detection algorithms and started 
 __Day 022 Progress:__ Implemented vanilla encoder using fully connected network.
 
 __Day 023 Progress:__ Tried some hyperparameter tuning and added visualization. Also tweaked implemented network.
- (Visualize Results: https://wandb.ai/ms_research/Autoencoder)
+ (Visualize Results: https://wandb.ai/aniketthomas/Autoencoder)
+
+ __Day 024 Progress:__ Adding CNN based autoencoder and addin TSNE based visualization for different latent size
